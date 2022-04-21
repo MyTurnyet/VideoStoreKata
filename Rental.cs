@@ -18,12 +18,17 @@ namespace VideoStore
 
         public void WriteValuesToReciept(StringBuilder stringBuilder)
         {
-            stringBuilder.AppendLine("\t" + MovieRented.Title + "\t" + AmountAsDouble().ToString("0.00"));
+            stringBuilder.AppendLine("\t" + MovieRented.Title + "\t" + AmountFormattedAsCurrency());
         }
 
-        private double AmountAsDouble()
+        public string AmountFormattedAsCurrency()
         {
-            return (double)Amount() / 100;
+            return ((double)Amount() / 100).ToString("0.00");
+        }
+
+        public string MovieName()
+        {
+            return MovieRented.Title;
         }
     }
 }

@@ -15,19 +15,29 @@ namespace VideoStore
             StringBuilder outputToReciept = new StringBuilder();
             outputToReciept.AppendLine("Rental Record for " + Name);
 
-            int totalAmount = Rentals.Sum(rental => rental.Amount());
-            int frequentRenterPoints = Rentals.Sum(rental => rental.RenterPoints());
+            int totalAmount = TotalAmount();
+            int frequentRenterPoints = FrequentRenterPoints();
             Rentals.ForEach(rental => rental.WriteValuesToReciept(outputToReciept));
 
-            outputToReciept.AppendLine("You owed " + TotalAmountAsDecimal(totalAmount).ToString("0.00"));
+            outputToReciept.AppendLine("You owed " + TotalAmountFormattedAsCurrency());
             outputToReciept.AppendLine("You earned " + frequentRenterPoints + " frequent renter points");
 
             return outputToReciept.ToString();
         }
 
-        private static double TotalAmountAsDecimal(double totalAmount)
+        public int FrequentRenterPoints()
         {
-            return (totalAmount / 100);
+            return Rentals.Sum(rental => rental.RenterPoints());
+        }
+
+        private int TotalAmount()
+        {
+            return Rentals.Sum(rental => rental.Amount());
+        }
+
+        public string TotalAmountFormattedAsCurrency()
+        {
+            return (TotalAmount() / 100).ToString("0.00");
         }
     }
 }

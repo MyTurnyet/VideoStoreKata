@@ -1,22 +1,39 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 
 namespace VideoStore;
 
 public class TextStatement
 {
-    private readonly Customer _customer;
+    private readonly StringBuilder _stringBuilder= new StringBuilder();
 
-    public TextStatement(Customer customer)
+
+    public string CreateCustomerReceipt(Customer customer)
     {
-        _customer = customer;
+        AppendHeader(customer);
+        WriteLineItems(customer.Rentals);
+        AppendFooter(customer);
+        return _stringBuilder.ToString();
     }
 
-    public string Output()
+    private void WriteLineItems(List<Rental> rentals)
     {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("Rental Record for "+_customer.Name);
-        stringBuilder.AppendLine("You owed 0.00");
-        stringBuilder.AppendLine("You earned 0 frequent renter points");
-        return stringBuilder.ToString();
+        string outputFormat = "\t{0}\t{1}\r\n";
+        foreach (Rental rental in rentals)
+        {
+            _stringBuilder.AppendFormat(outputFormat, rental.MovieName(), rental.AmountFormattedAsCurrency());
+        }
+    }
+
+
+    private void AppendFooter(Customer customer)
+    {
+        _stringBuilder.AppendLine($"You owed {customer.TotalAmountFormattedAsCurrency()}");
+        _stringBuilder.AppendLine($"You earned {customer.FrequentRenterPoints()} frequent renter points");
+    }
+
+    private void AppendHeader(Customer customer)
+    {
+        _stringBuilder.AppendLine("Rental Record for " + customer.Name);
     }
 }

@@ -19,6 +19,7 @@ namespace VideoStore
             customer.Rentals.Add(new Rental { MovieRented = new ChildrensMovie { Title = "Bambi" }, DaysRented = 3 });
             customer.Rentals.Add(
                 new Rental { MovieRented = new ChildrensMovie { Title = "Toy Story" }, DaysRented = 4 });
+            TextStatement statement = new TextStatement();
 
             Assert.AreEqual("Rental Record for Bob\r\n" +
                             "\tJaws\t2.00\r\n" +
@@ -28,7 +29,7 @@ namespace VideoStore
                             "\tBambi\t1.50\r\n" +
                             "\tToy Story\t3.00\r\n" +
                             "You owed 19.00\r\n" +
-                            "You earned 7 frequent renter points\r\n", customer.Statement());
+                            "You earned 7 frequent renter points\r\n", statement.CreateCustomerReceipt(customer));
         }
     }
 }
