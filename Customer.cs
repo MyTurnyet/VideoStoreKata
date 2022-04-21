@@ -18,10 +18,11 @@ namespace VideoStore
             int frequentRenterPoints = 0;
             string result = "Rental Record for " + Name + "\n";
 
-            while (Rentals.GetEnumerator().MoveNext())
+            var enumerator = Rentals.GetEnumerator();
+            while (enumerator.MoveNext())
             {
                 double thisAmount = 0;
-                Rental each = Rentals.GetEnumerator().Current;
+                Rental each = enumerator.Current;
 
                 // determines the amount for each line
                 switch (each.Movie.PriceCode)
@@ -49,12 +50,12 @@ namespace VideoStore
                     frequentRenterPoints++;
 
                 // show figures for this rental
-                result += "\t" + each.Movie.Title + "\t" + thisAmount + "\n";
+                result += "\t" + each.Movie.Title + "\t" + thisAmount.ToString("0.0") + "\n";
                 totalAmount += thisAmount;
             }
 
             // add footer lines
-            result += "You owed " + totalAmount + "\n";
+            result += "You owed " + totalAmount.ToString("0.00") + "\n";
             result += "You earned " + frequentRenterPoints + " frequent renter points";
 
             return result;
