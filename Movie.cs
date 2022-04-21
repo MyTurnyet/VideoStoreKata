@@ -10,7 +10,7 @@ namespace VideoStore
 
         public string Title { get; init; } = String.Empty;
         public int PriceCode { get; init; }
-        protected Price Price { get; init; } = new Price();
+        protected Price Price { get; init; }= new RegularPrice();
 
         public int Amount(int numberOfDaysRented)
         {
@@ -22,7 +22,7 @@ namespace VideoStore
     {
         public RegularMovie()
         {
-            Price = new Price();
+            Price = new RegularPrice();
         }
     }
 }

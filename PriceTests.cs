@@ -9,7 +9,7 @@ public class PriceTests
     public void ShouldReturnAmountForBaseRentalOfOneDay_As200()
     {
         //assign
-        Price price = new Price { BaseNumberOfRentalDays = 2, BaseRentalAmount = 200, OverDueMultiplier = 1.5 };
+        Price price = new RegularPrice();
         //act
         int numberOfDaysRented = 1;
         int amount = price.RentalPriceForNumberOfDays(numberOfDaysRented);
@@ -22,7 +22,7 @@ public class PriceTests
     public void ShouldReturnAmountForBaseRentalOfTwoDays_As200()
     {
         //assign
-        Price price = new Price { BaseNumberOfRentalDays = 2, BaseRentalAmount = 200, OverDueMultiplier = 1.5 };
+        Price price = new RegularPrice();
         //act
         int numberOfDaysRented = 2;
         int amount = price.RentalPriceForNumberOfDays(numberOfDaysRented);
@@ -35,7 +35,7 @@ public class PriceTests
     public void ShouldReturnAmountForBaseRentalOfThreeDays_As300()
     {
         //assign
-        Price price = new Price { BaseNumberOfRentalDays = 2, BaseRentalAmount = 200, OverDueMultiplier = 1.5};
+        Price price = new RegularPrice();
         //act
         int numberOfDaysRented = 3;
         int amount = price.RentalPriceForNumberOfDays(numberOfDaysRented);
