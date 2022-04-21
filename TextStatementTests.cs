@@ -48,7 +48,7 @@ public class TextStatementTests
         string output = statement.CreateCustomerReceipt(customer);
         //assert
         Assert.AreEqual("<h2>Mike</h2>\r\n" +
-                        "<br/>You owe 0.00\r\n", output);
+                        "<br/>You owed 0.00\r\n", output);
     }
     [TestMethod, TestCategory("Unit")]
     public void ShouldReturnHtmlStatementWithHeaderAndFooterAndRentalInformation()
@@ -62,8 +62,8 @@ public class TextStatementTests
         string output = statement.CreateCustomerReceipt(customer);
         //assert
         Assert.AreEqual("<h2>Mike</h2>\r\n" +
-                        "<b>Jaws</b>: 2.00\r\n" +
-                        "<br/>You owe 2.00\r\n", output);
+                        "<b>Jaws</b>:2.00\r\n" +
+                        "<br/>You owed 2.00\r\n", output);
     }
 
   

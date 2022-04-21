@@ -57,7 +57,7 @@ public class HtmlStatement : ICustomerStatement
 
     private void WriteLineItems(List<Rental> rentals)
     {
-        string outputFormat = "<b>{0}</b>: {1}\r\n";
+        string outputFormat = "<b>{0}</b>:{1}\r\n";
         foreach (Rental rental in rentals)
         {
             _stringBuilder.AppendFormat(outputFormat, rental.MovieName(), rental.AmountFormattedAsCurrency());
@@ -66,7 +66,7 @@ public class HtmlStatement : ICustomerStatement
 
     private void AppendFooter(Customer customer)
     {
-        _stringBuilder.AppendLine("<br/>You owe " + customer.TotalAmountFormattedAsCurrency());
+        _stringBuilder.AppendLine("<br/>You owed " + customer.TotalAmountFormattedAsCurrency());
     }
 
     private void AppendHeader(Customer customer)
