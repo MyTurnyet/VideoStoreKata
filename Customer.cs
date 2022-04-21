@@ -18,39 +18,24 @@ namespace VideoStore
             int frequentRenterPoints = 0;
             string result = "Rental Record for " + Name + "\n";
 
-            var enumerator = Rentals.GetEnumerator();
-            while (enumerator.MoveNext())
+            foreach (Rental rental in Rentals)
+            // var enumerator = Rentals.GetEnumerator();
+            // while (enumerator.MoveNext())
             {
                 double thisAmount = 0;
-                Rental each = enumerator.Current;
+                Rental each = rental;
 
                 // determines the amount for each line
-                switch (each.Movie.PriceCode)
-                {
-                    case Movie.REGULAR:
-                        thisAmount += 2;
-                        if (each.DaysRented > 2)
-                            thisAmount += (each.DaysRented - 2) * 1.5;
-                        break;
-                    case Movie.NEW_RELEASE:
-                        thisAmount += each.DaysRented * 3;
-                        break;
-                    case Movie.CHILDRENS:
-                        thisAmount += 1.5;
-                        if (each.DaysRented > 3)
-                            thisAmount += (each.DaysRented - 3) * 1.5;
-                        break;
-                }
 
                 // add frequent renter points
                 frequentRenterPoints++;
 
                 // add bonus for a two day new release rental
-                if (each.Movie.PriceCode == Movie.NEW_RELEASE && each.DaysRented > 1)
-                    frequentRenterPoints++;
+                // if (each.Movie.PriceCode == Movie.NEW_RELEASE && each.DaysRented > 1)
+                //     frequentRenterPoints++;
 
                 // show figures for this rental
-                result += "\t" + each.Movie.Title + "\t" + thisAmount.ToString("0.0") + "\n";
+                // result += "\t" + each.Movie.Title + "\t" + thisAmount.ToString("0.0") + "\n";
                 totalAmount += thisAmount;
             }
 

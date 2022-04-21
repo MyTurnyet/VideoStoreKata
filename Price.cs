@@ -2,9 +2,9 @@
 
 public abstract class Price
 {
-    protected int BaseNumberOfRentalDays { private get; init; } = 2;
-    protected int BaseRentalAmount { private get; init; } = 200;
-    protected double OverDueAmountPerDay { private get; init; } =150;
+    protected int BaseNumberOfRentalDays { private get; init; }
+    protected int BaseRentalAmount { private get; init; }
+    protected double OverDueAmountPerDay { private get; init; }
 
     public int RentalPriceForNumberOfDays(int numberOfDaysRented)
     {
@@ -31,5 +31,14 @@ public class NewReleasePrice : Price
         BaseRentalAmount = 300;
         BaseNumberOfRentalDays = 1;
         OverDueAmountPerDay = 300;
+    }
+}
+public class ChildrensPrice : Price
+{
+    public ChildrensPrice()
+    {
+        BaseRentalAmount = 150;
+        BaseNumberOfRentalDays = 3;
+        OverDueAmountPerDay = 150;
     }
 }

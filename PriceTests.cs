@@ -67,5 +67,29 @@ public class PriceTests
 
         //assert
         Assert.AreEqual(600, amount);
+    } 
+    [TestMethod, TestCategory("Unit")]
+    public void ShouldReturnAmountForChildrensRentalOfThreeDaysAs150()
+    {
+        //assign
+        Price price = new ChildrensPrice();
+        //act
+        int numberOfDaysRented = 3;
+        int amount = price.RentalPriceForNumberOfDays(numberOfDaysRented);
+
+        //assert
+        Assert.AreEqual(150, amount);
+    } 
+    [TestMethod, TestCategory("Unit")]
+    public void ShouldReturnAmountForChildrensRentalOfFourDaysAs300()
+    {
+        //assign
+        Price price = new ChildrensPrice();
+        //act
+        int numberOfDaysRented = 4;
+        int amount = price.RentalPriceForNumberOfDays(numberOfDaysRented);
+
+        //assert
+        Assert.AreEqual(300, amount);
     }
 }

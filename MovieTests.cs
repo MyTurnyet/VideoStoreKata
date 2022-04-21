@@ -6,10 +6,10 @@ namespace VideoStore;
 public class MovieTests
 {
     [TestMethod, TestCategory("Unit")]
-    public void ShouldReturnAmountFor2DaysRented_As200()
+    public void ShouldReturnAmountRegularMovieRentedFor2Days_As200()
     {
         //assign
-        RegularMovie movie = new RegularMovie { Title = "jaws" };
+        Movie movie = new RegularMovie { Title = "jaws" };
         int numberOfDaysRented = 2;
 
         //act
@@ -17,4 +17,67 @@ public class MovieTests
         //assert
         Assert.AreEqual(200, amount);
     }
+    [TestMethod, TestCategory("Unit")]
+    public void ShouldReturnAmountRegularMovieRentedFor3Days_As350()
+    {
+        //assign
+        Movie movie = new RegularMovie { Title = "jaws" };
+        int numberOfDaysRented = 3;
+
+        //act
+        int amount = movie.Amount(numberOfDaysRented);
+        //assert
+        Assert.AreEqual(350, amount);
+    }
+
+    [TestMethod, TestCategory("Unit")]
+    public void ShouldReturnAmountNewReleaseMovieRentedFor1Day_As300()
+    {
+        //assign
+        Movie movie = new NewReleaseMovie { Title = "jaws" };
+        int numberOfDaysRented = 1;
+
+        //act
+        int amount = movie.Amount(numberOfDaysRented);
+        //assert
+        Assert.AreEqual(300, amount);
+    }
+    [TestMethod, TestCategory("Unit")]
+    public void ShouldReturnAmountNewReleaseMovieRentedFor2Days_As600()
+    {
+        //assign
+        Movie movie = new NewReleaseMovie { Title = "jaws" };
+        int numberOfDaysRented = 2;
+
+        //act
+        int amount = movie.Amount(numberOfDaysRented);
+        //assert
+        Assert.AreEqual(600, amount);
+    } 
+    [TestMethod, TestCategory("Unit")]
+    public void ShouldReturnAmountChildrensMovieRentedFor3Days_As150()
+    {
+        //assign
+        Movie movie = new ChildrensMovie { Title = "cartoons" };
+        int numberOfDaysRented = 3;
+
+        //act
+        int amount = movie.Amount(numberOfDaysRented);
+        //assert
+        Assert.AreEqual(150, amount);
+    }
+    
+    [TestMethod, TestCategory("Unit")]
+    public void ShouldReturnAmountChildrensMovieRentedFor4Days_As300()
+    {
+        //assign
+        Movie movie = new ChildrensMovie { Title = "cartoons" };
+        int numberOfDaysRented = 4;
+
+        //act
+        int amount = movie.Amount(numberOfDaysRented);
+        //assert
+        Assert.AreEqual(300, amount);
+    }
 }
+

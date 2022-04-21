@@ -1,13 +1,17 @@
 ﻿namespace VideoStore
 {
     public class Rental {
-        public Movie Movie { get; }
-        public int DaysRented { get; }
+        public Movie MovieRented { private get; init; }
+        public int DaysRented { private get; init;}
 
-        public Rental(Movie movie, int daysRented) {
-            Movie = movie;
-            DaysRented = daysRented;
+        public int Amount()
+        {
+            return MovieRented.Amount(DaysRented);
         }
 
+        public int RenterPoints()
+        {
+            return 1;
+        }
     }
 }
