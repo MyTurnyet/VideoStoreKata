@@ -1,4 +1,6 @@
-﻿namespace VideoStore
+﻿using System;
+
+namespace VideoStore
 {
     public class Movie
     {
@@ -6,9 +8,9 @@
         public const int REGULAR = 0;
         public const int NEW_RELEASE = 1;
 
-        public string Title { get; init; }
-        public int PriceCode { get; init; } = 0;
-        public Price Price { protected get; init; } = new Price();
+        public string Title { get; init; } = String.Empty;
+        public int PriceCode { get; init; }
+        protected Price Price { get; init; } = new Price();
 
         public int Amount(int numberOfDaysRented)
         {
