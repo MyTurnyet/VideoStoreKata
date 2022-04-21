@@ -7,7 +7,7 @@ public class RentalPointsTests
 {
 
     [TestMethod, TestCategory("Unit")]
-    public void ShouldReturn1PointForRegularRenterPoint()
+    public void ShouldReturn1PointForRenterPoints()
     {
         //assign
         RentalPoints points = new RentalPoints();

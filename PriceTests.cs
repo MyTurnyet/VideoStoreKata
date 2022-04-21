@@ -6,19 +6,6 @@ namespace VideoStore;
 public class PriceTests
 {
     [TestMethod, TestCategory("Unit")]
-    public void ShouldReturnAmountForRegularRentalOfOneDay_As200()
-    {
-        //assign
-        Price price = new RegularPrice();
-        //act
-        int numberOfDaysRented = 1;
-        int amount = price.RentalPriceForNumberOfDays(numberOfDaysRented);
-
-        //assert
-        Assert.AreEqual(200, amount);
-    }
-
-    [TestMethod, TestCategory("Unit")]
     public void ShouldReturnAmountForRegularRentalOfTwoDays_As200()
     {
         //assign
