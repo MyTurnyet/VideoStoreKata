@@ -8,7 +8,7 @@ namespace VideoStore
         [TestMethod]
         public void Test()
         {
-            Customer customer = new Customer("Bob");
+            Customer customer = new Customer{Name = "Bob"};
 
             customer.Rentals.Add(new Rental { MovieRented = new RegularMovie { Title = "Jaws" }, DaysRented = 2 });
             customer.Rentals.Add(new Rental { MovieRented = new RegularMovie { Title = "GoldenEye" }, DaysRented = 3 });

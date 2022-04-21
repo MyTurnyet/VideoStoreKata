@@ -1,34 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace VideoStore
 {
     public class Customer
     {
-        public string Name { get; }
+        public string Name { get; init; }= String.Empty;
         public List<Rental> Rentals { get; } = new List<Rental>();
-
-        public Customer(string name)
-        {
-            Name = name;
-        }
 
         public string Statement()
         {
-            double totalAmount = 0;
-            int frequentRenterPoints = 0;
             StringBuilder outputToReciept = new StringBuilder();
             outputToReciept.AppendLine("Rental Record for " + Name);
 
-            foreach (Rental rental in Rentals)
-            {
-                totalAmount += rental.Amount();
-                frequentRenterPoints += rental.RenterPoints();
-                rental.WriteValuesToReciept(outputToReciept);
-            }
+            int totalAmount = Rentals.Sum(rental => rental.Amount());
+            int frequentRenterPoints = Rentals.Sum(rental => rental.RenterPoints());
+            Rentals.ForEach(rental => rental.WriteValuesToReciept(outputToReciept));
 
-            // add footer lines
             outputToReciept.AppendLine("You owed " + TotalAmountAsDecimal(totalAmount).ToString("0.00"));
             outputToReciept.AppendLine("You earned " + frequentRenterPoints + " frequent renter points");
 
@@ -37,7 +27,7 @@ namespace VideoStore
 
         private static double TotalAmountAsDecimal(double totalAmount)
         {
-            return (totalAmount/100);
+            return (totalAmount / 100);
         }
     }
 }
