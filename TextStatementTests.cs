@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VideoStore;
 
@@ -6,18 +8,19 @@ namespace VideoStore;
 public class TextStatementTests
 {
     [TestMethod, TestCategory("Unit")]
-    public void ShouldReturnStatementWithHeaderAndFooter()
+    public void ShouldReturnTextStatementWithHeaderAndFooter()
     {
         //assign
         Customer customer = new Customer { Name = "Mike" };
-        TextStatement statement = new TextStatement();
+        ICustomerStatement statement = new TextStatement();
         //act
         string output = statement.CreateCustomerReceipt(customer);
         //assert
         Assert.AreEqual("Rental Record for Mike\r\n" +
                         "You owed 0.00\r\n" +
                         "You earned 0 frequent renter points\r\n", output);
-    }   
+    }
+
     [TestMethod, TestCategory("Unit")]
     public void ShouldReturnStatementWithHeaderAndFooterAndRentalInformation()
     {
@@ -25,7 +28,7 @@ public class TextStatementTests
         Customer customer = new Customer { Name = "Mike" };
         customer.Rentals.Add(new Rental { MovieRented = new RegularMovie { Title = "Jaws" }, DaysRented = 2 });
 
-        TextStatement statement = new TextStatement();
+        ICustomerStatement statement = new TextStatement();
         //act
         string output = statement.CreateCustomerReceipt(customer);
         //assert
@@ -34,4 +37,34 @@ public class TextStatementTests
                         "You owed 2.00\r\n" +
                         "You earned 1 frequent renter points\r\n", output);
     }
+
+    [TestMethod, TestCategory("Unit")]
+    public void ShouldReturnHTMLStatementWithHeaderAndFooter()
+    {
+        //assign
+        Customer customer = new Customer { Name = "Mike" };
+        HtmlStatement statement = new HtmlStatement();
+        //act
+        string output = statement.CreateCustomerReceipt(customer);
+        //assert
+        Assert.AreEqual("<h2>Mike</h2>\r\n" +
+                        "<br/>You owe 0.00\r\n", output);
+    }
+    [TestMethod, TestCategory("Unit")]
+    public void ShouldReturnHtmlStatementWithHeaderAndFooterAndRentalInformation()
+    {
+        //assign
+        Customer customer = new Customer { Name = "Mike" };
+        customer.Rentals.Add(new Rental { MovieRented = new RegularMovie { Title = "Jaws" }, DaysRented = 2 });
+
+        HtmlStatement statement = new HtmlStatement();
+        //act
+        string output = statement.CreateCustomerReceipt(customer);
+        //assert
+        Assert.AreEqual("<h2>Mike</h2>\r\n" +
+                        "<b>Jaws</b>: 2.00\r\n" +
+                        "<br/>You owe 2.00\r\n", output);
+    }
+
+  
 }
