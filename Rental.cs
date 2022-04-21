@@ -6,29 +6,13 @@ namespace VideoStore
         public Movie MovieRented { private get; init; } = new RegularMovie();
         public int DaysRented { private get; init;}
 
-        public int Amount()
-        {
-            return MovieRented.Amount(DaysRented);
-        }
-
-        public int RenterPoints()
-        {
-            return MovieRented.FrequentRenterPoints(DaysRented);
-        }
-
+        public int Amount() => MovieRented.Amount(DaysRented);
+        public int RenterPoints() => MovieRented.FrequentRenterPoints(DaysRented);
         public void WriteValuesToReciept(StringBuilder stringBuilder)
         {
             stringBuilder.AppendLine("\t" + MovieRented.Title + "\t" + AmountFormattedAsCurrency());
         }
-
-        public string AmountFormattedAsCurrency()
-        {
-            return ((double)Amount() / 100).ToString("0.00");
-        }
-
-        public string MovieName()
-        {
-            return MovieRented.Title;
-        }
+        public string AmountFormattedAsCurrency() => ((double)Amount() / 100).ToString("0.00");
+        public string MovieName() => MovieRented.Title;
     }
 }

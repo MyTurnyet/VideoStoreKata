@@ -22,7 +22,7 @@ namespace VideoStore
                             "You earned 7 frequent renter points\r\n", statement.CreateCustomerReceipt(customer));
         }  
         [TestMethod]
-        public void ShouleWriteCustomerToHTMLStatement()
+        public void ShouleWriteCustomerToHtmlStatement()
         {
             var customer = GetCustomerWithRentals();
             ICustomerStatement statement = new HtmlStatement();

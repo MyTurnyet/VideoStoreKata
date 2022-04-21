@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace VideoStore
 {
@@ -7,18 +6,9 @@ namespace VideoStore
     {
         public string Title { get; init; } = String.Empty;
         protected Price Price { get; init; } = new RegularPrice();
-
-        protected RentalPoints RentalPoints { get; init; } = new RentalPoints();
-
-        public int Amount(int numberOfDaysRented)
-        {
-            return Price.RentalPriceForNumberOfDays(numberOfDaysRented);
-        }
-
-        public int FrequentRenterPoints(int numberOfDaysRented)
-        {
-            return RentalPoints.AmountEarned(numberOfDaysRented);
-        }
+        protected RentalPoints RentalPoints { get; init; } = new();
+        public int Amount(int numberOfDaysRented) => Price.RentalPriceForNumberOfDays(numberOfDaysRented);
+        public int FrequentRenterPoints(int numberOfDaysRented) => RentalPoints.AmountEarned(numberOfDaysRented);
     }
 
     public class RegularMovie : Movie
