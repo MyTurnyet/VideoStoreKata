@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VideoStore;
 
@@ -12,10 +13,9 @@ public class MovieTests
         Movie movie = new RegularMovie { Title = "jaws" };
         int numberOfDaysRented = 2;
 
-        //act
-        int amount = movie.Amount(numberOfDaysRented);
         //assert
-        Assert.AreEqual(200, amount);
+        Assert.AreEqual(200, movie.Amount(numberOfDaysRented));
+        Assert.AreEqual(1, movie.FrequentRenterPoints(numberOfDaysRented));
     }
     [TestMethod, TestCategory("Unit")]
     public void ShouldReturnAmountRegularMovieRentedFor3Days_As350()
@@ -28,6 +28,8 @@ public class MovieTests
         int amount = movie.Amount(numberOfDaysRented);
         //assert
         Assert.AreEqual(350, amount);
+        Assert.AreEqual(1, movie.FrequentRenterPoints(numberOfDaysRented));
+
     }
 
     [TestMethod, TestCategory("Unit")]
@@ -40,6 +42,7 @@ public class MovieTests
         //act
         int amount = movie.Amount(numberOfDaysRented);
         //assert
+        Assert.AreEqual(1, movie.FrequentRenterPoints(numberOfDaysRented));
         Assert.AreEqual(300, amount);
     }
     [TestMethod, TestCategory("Unit")]
@@ -53,6 +56,8 @@ public class MovieTests
         int amount = movie.Amount(numberOfDaysRented);
         //assert
         Assert.AreEqual(600, amount);
+        Assert.AreEqual(2, movie.FrequentRenterPoints(numberOfDaysRented));
+
     } 
     [TestMethod, TestCategory("Unit")]
     public void ShouldReturnAmountChildrensMovieRentedFor3Days_As150()
@@ -65,6 +70,8 @@ public class MovieTests
         int amount = movie.Amount(numberOfDaysRented);
         //assert
         Assert.AreEqual(150, amount);
+        Assert.AreEqual(1, movie.FrequentRenterPoints(numberOfDaysRented));
+
     }
     
     [TestMethod, TestCategory("Unit")]
@@ -78,6 +85,8 @@ public class MovieTests
         int amount = movie.Amount(numberOfDaysRented);
         //assert
         Assert.AreEqual(300, amount);
+        Assert.AreEqual(1, movie.FrequentRenterPoints(numberOfDaysRented));
     }
+
 }
 

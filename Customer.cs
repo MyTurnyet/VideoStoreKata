@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace VideoStore
 {
@@ -16,34 +18,26 @@ namespace VideoStore
         {
             double totalAmount = 0;
             int frequentRenterPoints = 0;
-            string result = "Rental Record for " + Name + "\n";
+            StringBuilder outputToReciept = new StringBuilder();
+            outputToReciept.AppendLine("Rental Record for " + Name);
 
             foreach (Rental rental in Rentals)
-            // var enumerator = Rentals.GetEnumerator();
-            // while (enumerator.MoveNext())
             {
-                double thisAmount = 0;
-                Rental each = rental;
-
-                // determines the amount for each line
-
-                // add frequent renter points
-                frequentRenterPoints++;
-
-                // add bonus for a two day new release rental
-                // if (each.Movie.PriceCode == Movie.NEW_RELEASE && each.DaysRented > 1)
-                //     frequentRenterPoints++;
-
-                // show figures for this rental
-                // result += "\t" + each.Movie.Title + "\t" + thisAmount.ToString("0.0") + "\n";
-                totalAmount += thisAmount;
+                totalAmount += rental.Amount();
+                frequentRenterPoints += rental.RenterPoints();
+                rental.WriteValuesToReciept(outputToReciept);
             }
 
             // add footer lines
-            result += "You owed " + totalAmount.ToString("0.00") + "\n";
-            result += "You earned " + frequentRenterPoints + " frequent renter points";
+            outputToReciept.AppendLine("You owed " + TotalAmountAsDecimal(totalAmount).ToString("0.00"));
+            outputToReciept.AppendLine("You earned " + frequentRenterPoints + " frequent renter points");
 
-            return result;
+            return outputToReciept.ToString();
+        }
+
+        private static double TotalAmountAsDecimal(double totalAmount)
+        {
+            return (totalAmount/100);
         }
     }
 }

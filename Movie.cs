@@ -13,6 +13,11 @@ namespace VideoStore
         {
             return Price.RentalPriceForNumberOfDays(numberOfDaysRented);
         }
+
+        public int FrequentRenterPoints(int numberOfDaysRented)
+        {
+            return RentalPoints.AmountEarned(numberOfDaysRented);
+        }
     }
 
     class RegularMovie : Movie
@@ -29,7 +34,7 @@ namespace VideoStore
         public NewReleaseMovie()
         {
             Price = new NewReleasePrice();
-            RentalPoints = new RentalPoints();
+            RentalPoints = new NewReleaseRentalPoints();
         }
     }
 

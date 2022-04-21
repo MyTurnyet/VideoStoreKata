@@ -20,15 +20,15 @@ namespace VideoStore
             customer.Rentals.Add(
                 new Rental { MovieRented = new ChildrensMovie { Title = "Toy Story" }, DaysRented = 4 });
 
-            Assert.AreEqual("Rental Record for Bob\n" +
-                            "\tJaws\t2.0\n" +
-                            "\tGoldenEye\t3.5\n" +
-                            "\tShortNew\t3.0\n" +
-                            "\tLongNew\t6.0\n" +
-                            "\tBambi\t1.5\n" +
-                            "\tToy Story\t3.0\n" +
-                            "You owed 19.00\n" +
-                            "You earned 7 frequent renter points", customer.Statement());
+            Assert.AreEqual("Rental Record for Bob\r\n" +
+                            "\tJaws\t2.00\r\n" +
+                            "\tGoldenEye\t3.50\r\n" +
+                            "\tShortNew\t3.00\r\n" +
+                            "\tLongNew\t6.00\r\n" +
+                            "\tBambi\t1.50\r\n" +
+                            "\tToy Story\t3.00\r\n" +
+                            "You owed 19.00\r\n" +
+                            "You earned 7 frequent renter points\r\n", customer.Statement());
         }
     }
 }
