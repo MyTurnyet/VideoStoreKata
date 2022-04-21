@@ -1,17 +1,26 @@
 ﻿namespace VideoStore
 {
-    public class Movie {
+    public class Movie
+    {
         public const int CHILDRENS = 2;
         public const int REGULAR = 0;
         public const int NEW_RELEASE = 1;
 
-        public string Title { get; }
-        public int PriceCode { get; set; }
+        public string Title { get; init; }
+        public int PriceCode { get; init; } = 0;
+        public Price Price { protected get; init; } = new Price();
 
-        public Movie(string title, int priceCode) {
-            Title = title;
-            PriceCode = priceCode;
+        public int Amount(int numberOfDaysRented)
+        {
+            return Price.RentalPriceForNumberOfDays(numberOfDaysRented);
         }
+    }
 
-
-    }}
+    class RegularMovie : Movie
+    {
+        public RegularMovie()
+        {
+            Price = new Price();
+        }
+    }
+}
