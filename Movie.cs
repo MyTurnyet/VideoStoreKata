@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace VideoStore
 {
@@ -20,7 +21,7 @@ namespace VideoStore
         }
     }
 
-    class RegularMovie : Movie
+    public class RegularMovie : Movie
     {
         public RegularMovie()
         {
